@@ -1,0 +1,21 @@
+.member-card {
+  border: 1px solid green;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: #767676;
+  max-width: 10vw;
+}
+
+.member-title {
+  color: white;
+}
+
+.member-race {
+  color: yellow;
+}
+
+.member-emoji {
+  font-size: 5rem;
+}
