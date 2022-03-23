@@ -6,6 +6,7 @@ import { Human } from "./Human";
 import { Cat } from "./Cat";
 import FamilyPets from "./FamilyPets";
 import PetsOut from "./PetsOut";
+import { Translate, withTranslation } from "test-component-package-ca";
 
 const familyMembers = [
   {
@@ -41,6 +42,15 @@ const familyMembers = [
     race: "Dog",
   },
 ];
+
+const Test: React.FC<{ text: string; t: (text: string) => string }> = ({
+  text = "Hello mom",
+  t,
+}) => {
+  return <div>{t(text)}</div>;
+};
+
+const TextWithTranslation = withTranslation()(Test);
 
 export const FamilyGroup = () => {
   const [filter, setFilter] = useState<string>();
@@ -83,6 +93,19 @@ export const FamilyGroup = () => {
           return <Human {...member} key={`${member.name}-pets`} />;
         })}
       </FamilyPets>
+      <hr />
+      <h1>
+        * Testing the npm published library for basic translations with HOCs and
+        Render Props
+      </h1>
+      <Translate>{({ t }) => <p>{t("subscribe frequently")}</p>}</Translate>
+      <Translate>{({ t }) => <p>{t("follow")}</p>}</Translate>
+      <Translate>{({ t }) => <p>{t("like")}</p>}</Translate>
+      <Translate>{({ t }) => <p>{t("dislike")}</p>}</Translate>
+      <TextWithTranslation text="comment" />
+      <TextWithTranslation text="allow notifications" />
+      <TextWithTranslation text="Hello mom" />
+      <TextWithTranslation text="search" />
     </>
   );
 };

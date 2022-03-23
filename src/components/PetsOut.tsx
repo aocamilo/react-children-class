@@ -1,7 +1,6 @@
-import { Children, isValidElement, ReactNode } from "react";
+import { Children, isValidElement } from "react";
 
 const PetsOut: React.FC<{
-  children: ReactNode[];
   style?: React.CSSProperties;
   filter?: string;
 }> = ({ children, style }) => {

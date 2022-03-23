@@ -1,6 +1,6 @@
 import "./styles/family-styles.css";
 
-export const Cat = ({ name, race }: { race: string; name: string }) => {
+export const Cat = ({ name }: { name: string }) => {
   return (
     <div className="member-card">
       <div style={{ display: "flex", flexDirection: "column" }}>

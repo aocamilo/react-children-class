@@ -1,7 +1,6 @@
-import { Children, ReactNode } from "react";
+import { Children } from "react";
 
 const Family: React.FC<{
-  children: ReactNode[];
   style?: React.CSSProperties;
   filter?: string;
 }> = ({ children, style, filter }) => {

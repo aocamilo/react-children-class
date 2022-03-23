@@ -1,8 +1,7 @@
-import { Children, ReactNode } from "react";
+import { Children } from "react";
 import { Human } from "./Human";
 
 const FamilyPets: React.FC<{
-  children: ReactNode[];
   style?: React.CSSProperties;
   filter?: string;
 }> = ({ children, style }) => {
