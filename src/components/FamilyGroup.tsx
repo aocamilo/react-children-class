@@ -70,10 +70,18 @@ export const FamilyGroup = () => {
           <FamilyMember name={name} race={race} key={name} />
         ))}
       </Family>
-      <button onClick={() => onFilterClick("Dog")}>Show only dogs</button>
-      <button onClick={() => onFilterClick("Cat")}>Show only cats</button>
-      <button onClick={() => onFilterClick("Human")}>Show only humans</button>
-      <button onClick={() => onFilterClick("")}>Clear filter</button>
+      <button id="filter-dogs" onClick={() => onFilterClick("Dog")}>
+        Show only dogs
+      </button>
+      <button id="filter-cats" onClick={() => onFilterClick("Cat")}>
+        Show only cats
+      </button>
+      <button id="filter-humans" onClick={() => onFilterClick("Human")}>
+        Show only humans
+      </button>
+      <button id="reset-filter" onClick={() => onFilterClick("")}>
+        Clear filter
+      </button>
       <hr />
       <h1>* Detect if a children is a valid element.</h1>
       <PetsOut style={{ display: "flex", flexDirection: "row" }}>

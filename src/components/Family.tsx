@@ -1,6 +1,7 @@
 import { Children } from "react";
 
 const Family: React.FC<{
+  children: JSX.Element[];
   style?: React.CSSProperties;
   filter?: string;
 }> = ({ children, style, filter }) => {

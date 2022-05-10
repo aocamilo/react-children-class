@@ -1,6 +1,7 @@
 import { Children, isValidElement } from "react";
 
 const PetsOut: React.FC<{
+  children: any;
   style?: React.CSSProperties;
   filter?: string;
 }> = ({ children, style }) => {

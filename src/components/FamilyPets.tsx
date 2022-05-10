@@ -2,6 +2,7 @@ import { Children } from "react";
 import { Human } from "./Human";
 
 const FamilyPets: React.FC<{
+  children: JSX.Element[];
   style?: React.CSSProperties;
   filter?: string;
 }> = ({ children, style }) => {
