@@ -1,52 +1,64 @@
+const getSelector = (selector) => `#filter-${selector}`;
+
+const testSelectors = {
+  camilo: getSelector("Camilo"),
+  manuela: getSelector("Manuela"),
+  anaLucia: getSelector("AnaLucia"),
+  ruben: getSelector("Ruben"),
+  lucia: getSelector("Lucia"),
+  macarena: getSelector("Macarena"),
+  muneco: getSelector("Muñeco"),
+  lupita: getSelector("Lupita"),
+  dogs: getSelector("dogs"),
+  cats: getSelector("cats"),
+  humans: getSelector("humans"),
+  resetFilter: "#reset-filter",
+};
+
 describe("When accesing the app", () => {
+  const humans = ["camilo", "manuela", "anaLucia", "ruben", "lucia"];
+  const dogs = ["macarena", "muneco"];
+  const cats = ["lupita"];
+
+  const assertTags = (assertion, tags) => {
+    tags.forEach((tag) => {
+      console.log(tag, testSelectors[tag]);
+      cy.get(testSelectors[tag]).should(assertion);
+    });
+  };
+
+  const filterBy = (tag) => {
+    cy.get(testSelectors[tag]).click();
+  };
+
   it("Should see the family together", () => {
     cy.visit("");
-    cy.get("#filter-Camilo").should("exist").should("be.visible");
-    cy.get("#filter-Manuela").should("exist").should("be.visible");
-    cy.get("#filter-AnaLucia").should("exist").should("be.visible");
-    cy.get("#filter-Ruben").should("exist").should("be.visible");
-    cy.get("#filter-Lucia").should("exist").should("be.visible");
-
-    cy.get("#filter-Macarena").should("exist").should("be.visible");
-    cy.get("#filter-Muñeco").should("exist").should("be.visible");
-
-    cy.get("#filter-Lupita").should("exist").should("be.visible");
+    assertTags("exist", humans);
+    assertTags("exist", dogs);
+    assertTags("exist", cats);
   });
 
   it("Should filter by race correctly", () => {
-    cy.get("#filter-dogs").click();
-    cy.get("#filter-Camilo").should("not.exist");
-    cy.get("#filter-Lupita").should("not.exist");
-    cy.get("#filter-Macarena").should("exist").should("be.visible");
-    cy.get("#filter-Muñeco").should("exist").should("be.visible");
+    filterBy("dogs");
+    assertTags("not.exist", humans);
+    assertTags("not.exist", cats);
+    assertTags("exist", dogs);
 
-    cy.get("#filter-cats").click();
-    cy.get("#filter-Macarena").should("not.exist");
-    cy.get("#filter-Lupita").should("exist").should("be.visible");
+    filterBy("cats");
+    assertTags("not.exist", humans);
+    assertTags("not.exist", dogs);
+    assertTags("exist", cats);
 
-    cy.get("#filter-humans").click();
-    cy.get("#filter-Macarena").should("not.exist");
-    cy.get("#filter-Lupita").should("not.exist");
-
-    cy.get("#filter-Camilo").should("exist").should("be.visible");
-    cy.get("#filter-Manuela").should("exist").should("be.visible");
-    cy.get("#filter-AnaLucia").should("exist").should("be.visible");
-    cy.get("#filter-Ruben").should("exist").should("be.visible");
-    cy.get("#filter-Lucia").should("exist").should("be.visible");
+    filterBy("humans");
+    assertTags("exist", humans);
+    assertTags("not.exist", dogs);
+    assertTags("not.exist", cats);
   });
 
   it("Should show all family members when resetting the filter", () => {
-    // https://github.com/indigo-ag/acorn/pull/3848/files#r868233454
-    cy.get("#reset-filter").click();
-    cy.get("#filter-Camilo").should("exist").should("be.visible");
-    cy.get("#filter-Manuela").should("exist").should("be.visible");
-    cy.get("#filter-AnaLucia").should("exist").should("be.visible");
-    cy.get("#filter-Ruben").should("exist").should("be.visible");
-    cy.get("#filter-Lucia").should("exist").should("be.visible");
-
-    cy.get("#filter-Macarena").should("exist").should("be.visible");
-    cy.get("#filter-Muñeco").should("exist").should("be.visible");
-
-    cy.get("#filter-Lupita").should("exist").should("be.visible");
+    filterBy("resetFilter");
+    assertTags("exist", humans);
+    assertTags("exist", dogs);
+    assertTags("exist", cats);
   });
 });
